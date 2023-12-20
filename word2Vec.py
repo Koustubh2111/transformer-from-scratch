@@ -36,5 +36,17 @@ def generate_dict_data(tokens):
 
 #%%
 #Define the one hot encoding for each word in the vocab
+def one_hot_encode(n_tokens, word, word_to_id):
+
+    one_hot_word = np.zeros(n_tokens)
+    one_hot_word[word_to_id.get(word)] = 1
+    return one_hot_word
+
+#%%
+#Define the training data 
+#The skip gram method is implemented here where each input word has two context words 
+
+
+
 
 
