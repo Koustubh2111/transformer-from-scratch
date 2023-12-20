@@ -6,7 +6,6 @@ text = '''
 So do all who live to see such times. But that is not for them to decide. \
 All we have to decide is what to do with the time that is given us'''
 
-#%%
 #Tokenize the text
 def tokenize(text):
     #The problem is .split() is it includes punctuation
@@ -17,7 +16,6 @@ def tokenize(text):
     return pat.findall(text)
 
     
-#%%
 def generate_dict_data(tokens):
 
     word_to_index = {}
@@ -37,7 +35,7 @@ def generate_dict_data(tokens):
         count += 1
     return corpus, word_to_index, index_to_word
 
-#%%
+
 #Define the one hot encoding for each word in the vocab
 def one_hot_encode(n_corpus, word, word_to_index):
 
@@ -45,11 +43,8 @@ def one_hot_encode(n_corpus, word, word_to_index):
     one_hot_word[word_to_index.get(word)] = 1
     return one_hot_word
 
-#%%
 #Define the training data 
 #The skip gram method is implemented here where each input word has two context words 
-
-
 def generate_training_data(corpus, word_to_index, index_to_word):
     training_data = []
     len_corpus = len(corpus)
@@ -81,4 +76,4 @@ def generate_training_data(corpus, word_to_index, index_to_word):
 
     return training_data
 
-# %%
+
