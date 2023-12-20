@@ -18,43 +18,23 @@ def tokenize(text):
 
     
 #%%
-#Define a numeric mapping for each token
-def mapping(tokens):
-    word_to_num = {}
-    for num, token in enumerate(set(tokens)):
-        word_to_num[token] = num
-    return word_to_num
+def generate_dict_data(tokens):
+
+    word_to_index = {}
+    index_to_word = {}
+    count = 0
+
+    for token in tokens:
+        #convert word to lowercase
+        word = token.lower()
+        #In case there are repeated words 
+        if word_to_index.get(word) == None:
+            word_to_index.update({word : count})
+            index_to_word.update({count : token})
+        count += 1
+    return word_to_index, index_to_word
+
+#%%
+#Define the one hot encoding for each word in the vocab
 
 
-# %%
-np.random.seed(42)
-word_to_num = mapping(tokens)
-
-def generate_training_data(tokens, word_to_num, window):
-    X = []
-    y = []
-    n_tokens = len(tokens)
-    
-    for i in range(n_tokens):
-        idx = concat(
-            range(max(0, i - window), i), 
-            range(i, min(n_tokens, i + window + 1))
-        )
-        for j in idx:
-            if i == j:
-                continue
-            X.append(one_hot_encode(word_to_num[tokens[i]], len(word_to_num)))
-            y.append(one_hot_encode(word_to_num[tokens[j]], len(word_to_num)))
-    
-    return np.asarray(X), np.asarray(y)
-
-def concat(*iterables):
-    for iterable in iterables:
-        yield from iterable
-
-def one_hot_encode(id, vocab_size):
-    res = [0] * vocab_size
-    res[id] = 1
-    return res
-
-# %%
