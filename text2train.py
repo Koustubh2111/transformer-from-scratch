@@ -1,16 +1,18 @@
 #%%
 import numpy as np
 import re
-
+#%%
+"""
 text = '''
 So do all who live to see such times. But that is not for them to decide. \
 All we have to decide is what to do with the time that is given us'''
 
 half_window = 4
+"""
 
 class text2train():
 
-    def __init__(self):
+    def __init__(self, text, half_window):
         self.text = text
         self.half_window = half_window
         pass
@@ -90,3 +92,5 @@ class text2train():
         return training_data
 
 
+
+# %%
