@@ -49,7 +49,16 @@ class word2vec():
         y_c = self.softmax(u)
         return y_c, h, u
     
+    def backprop(self, e, h, x):
+        dl_dw2 = np.outer(h, e)  
+        dl_dw1 = np.outer(x, np.dot(self.w2, e.T))
+
+        # UPDATE WEIGHTS
+        self.w1 = self.w1 - (self.eta * dl_dw1)
+        self.w2 = self.w2 - (self.eta * dl_dw2)
+        pass
     
+
     
 
 
